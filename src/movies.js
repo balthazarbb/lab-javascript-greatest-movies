@@ -10,36 +10,52 @@ function getAllDirectors(movies){
 }
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
-function howManySteven(movies){
-    //filter the movies directed by StevenSpielberg and drama (genre)
-    filteredMovies = movies.filter(function(eachMovie){
-        if (eachMovie.director === 'Steven Spielberg' && eachMovie.genre.includes('Drama')){
-            return true 
-        }
-    })
-    return filteredMovies.length 
-}
+function howManyMovies(movies) {
+
+    // a filter that will "filter" the movies only with director "Steven Spielberg" and that INCLUDES "Drama" in its genres (genres is an array).
+    filteredMovies = movies.filter(function(eachMovie) {
+        if (eachMovie.director === 'Steven Spielberg' && eachMovie.genre.includes('Drama')) {
+            return true // the filter method ALWAYS expects a boolean as a return
+        } // indexOf could also work, however, .includes is more common in this cases.
+    });
+  
+    return filteredMovies.length // return the length of the array (how many movies)
+  }
 
 // Iteration 3: All rates average - Get the average of all rates with 2 decimals
-function scoresAverage(movies){
-      // to pass test in case there are no movies (0 is a falsy value so if movies.length is 0, then !movies.length is true)
-    if (!movies.length){
-        return 0;
+function scoresAverage(movies) {
+
+    // to pass test in case there are no movies (0 is a falsy value so if movies.length is 0, then !movies.length is true)
+    if (!movies.length) {
+      return 0;
     }
-    //reduce to sum all the ratings
-    let totalAverage = movies.reduce((a, b)=>{
-        // conditional to sum only if they exist (if b.rate exists it returns true in the condition)
-        if (b.score){
-            return a + b.score;
-        }else{
-            return a;
-        }
-    }, 0)
-    // return the average converted into a number and only two decimals
-    return Number ((totalAverage / movies.length).toFixed(2))
+  
+    // a reduce to sum all the rates
+    let totalAverage = movies.reduce((a, b) => {
+      // conditional to sum only if they exist (if b.rate exists it returns true in the condition)
+      if (b.score) {
+        return a + b.score;
+      } else {
+        return a;
+      }
+    }, 0);
+  
+    return Number((totalAverage / movies.length).toFixed(2)); // return the average converted into a number and only two decimals
 }
 // Iteration 4: Drama movies - Get the average of Drama Movies
+function dramaMoviesRate(movies) {
 
+    // filter to "filter" only the movies that include drama
+    let dramaMoviesArr = movies.filter(function(eachMovie) {
+      return eachMovie.genre.includes('Drama')  // indexOf could also work, however, .includes is more common as it returns a boolean.
+    });
+  
+    // or... ES6 reduced syntax
+    // let dramaMoviesArr = movies.filter(eachMovie => eachMovie.genre.includes('Drama'));
+  
+    // here we could run a similar code of the one in iteration 3 (to get average of array) or... we can reuse that same function with the dramaMoviesArr we just created and return its value!
+    return scoresAverage(dramaMoviesArr); // return value of running ratesAverage with new array
+  }
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
