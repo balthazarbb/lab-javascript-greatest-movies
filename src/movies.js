@@ -1,28 +1,45 @@
 // Iteration 1: All directors? - Get the array of all directors.
-let getAllDirectors = (moviesArr) => {
-    let directors = moviesArr.map (eachMovie=> {
-        return eachMovie.directorsArr
-            
+function getAllDirectors(movies){
+    //map will return new array of the directors
+    const directorsArr = movies.map(function(eachMovie){
+        return eachMovie.director
     })
+    //or ES6 Syntax
+    // const directorsArr =  moviesArr.map(movie => movie.director)         
+    return directorsArr;
 }
-// _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors. How could you "clean" a bit this array and make it unified (without duplicates)?
-//only the drama movies where Steven Spielberg is the director.
+
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
-
-function howManyMovies (arr){
-    
-    let filteredArray = arr.filter((director, genre)=>{
-    return elem.director === '"Steven Spielberg", "Drama"'
-     } )
-     
+function howManySteven(movies){
+    //filter the movies directed by StevenSpielberg and drama (genre)
+    filteredMovies = movies.filter(function(eachMovie){
+        if (eachMovie.director === 'Steven Spielberg' && eachMovie.genre.includes('Drama')){
+            return true 
+        }
+    })
+    return filteredMovies.length 
 }
+
 // Iteration 3: All rates average - Get the average of all rates with 2 decimals
-let ratesAverage((arr)=>{
-
+function scoresAverage(movies){
+      // to pass test in case there are no movies (0 is a falsy value so if movies.length is 0, then !movies.length is true)
+    if (!movies.length){
+        return 0;
+    }
+    //reduce to sum all the ratings
+    let totalAverage = movies.reduce((a, b)=>{
+        // conditional to sum only if they exist (if b.rate exists it returns true in the condition)
+        if (b.score){
+            return a + b.score;
+        }else{
+            return a;
+        }
+    }, 0)
+    // return the average converted into a number and only two decimals
+    return Number ((totalAverage / movies.length).toFixed(2))
 }
-)
 // Iteration 4: Drama movies - Get the average of Drama Movies
-let dramaMoviesRate(())
+
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
