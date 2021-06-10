@@ -60,9 +60,48 @@ function dramaMoviesRate(movies) {
   }
   
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-
+function orderByYear(movies) {
+    let moviesArr = JSON.parse(JSON.stringify(movies)); // deep clone to not mutate original
+  
+    // sort method by year and in case year is the same, by title. You don't need to save in a variable, as sort method will mutate the moviesArr we created above.
+    moviesArr.sort((a, b) => {
+      if (a.year > b.year) {
+        return 1;
+      } else if (b.year > a.year) {
+        return -1;
+      } else {
+        if (a.title > b.title) {
+          return 1;
+        } else if (b.title > a.title) {
+          return -1;
+        }
+        return 0;
+      }
+    });
+  
+    return moviesArr; // return the sorted array
+  }
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-
+function orderAlphabetically(movies) {
+    const moviesArr = JSON.parse(JSON.stringify(movies)); // deep clone to not mutate original
+  
+    // example of chaining methods: .sort to sort only by title, then .map to get only the movie title (not the whole object), then .slice to get only the first 20 elements
+    sortedMoviesArr = moviesArr
+      .sort((a, b) => {
+        if (a.title > b.title) {
+          return 1;
+        } else if (a.title < b.title) {
+          return -1;
+        } else {
+          return 0;
+        }
+      })
+      .map(eachMovie => eachMovie.title)
+      .slice(0, 20);
+  
+   return sortedMoviesArr // return the new array
+  }
+  
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 
 // BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
