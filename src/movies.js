@@ -23,7 +23,9 @@ function howManyMovies(movies) {
   }
 
 // Iteration 3: All rates average - Get the average of all rates with 2 decimals
-function scoresAverage(movies) {
+
+  // to pass test in case there are no movies (0 is a falsy value so if movies.length is 0, then !movies.length is true)
+  function scoresAverage(movies) {
 
     // to pass test in case there are no movies (0 is a falsy value so if movies.length is 0, then !movies.length is true)
     if (!movies.length) {
@@ -41,7 +43,7 @@ function scoresAverage(movies) {
     }, 0);
   
     return Number((totalAverage / movies.length).toFixed(2)); // return the average converted into a number and only two decimals
-}
+  }
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesRate(movies) {
 
@@ -56,6 +58,7 @@ function dramaMoviesRate(movies) {
     // here we could run a similar code of the one in iteration 3 (to get average of array) or... we can reuse that same function with the dramaMoviesArr we just created and return its value!
     return scoresAverage(dramaMoviesArr); // return value of running ratesAverage with new array
   }
+  
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
