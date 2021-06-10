@@ -103,5 +103,33 @@ function orderAlphabetically(movies) {
   }
   
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
+function turnHoursToMinutes(movies) {
 
+    // function that will take a string and will return the total minutes per hour as a number.
+    function convertHours(hourString) {
+      let calculateHour = hourString.split('h'); // split to divide the string in two. The first element will be the number as a string.
+      return Number(calculateHour[0]) * 60; // return the hours in minutes
+    }
+    
+    // function that will take a string and will return the minutes as a number.
+    function convertMinutes(minuteString) {
+      let calculateMinutes = minuteString.split('min'); // split to divide the string in two. The first element will be the number as a string.
+      return Number(calculateMinutes[0]); // return the minutes
+    }
+    
+    // function that will use both functions (convertHours & convertMinutes) to get the total amount of minutes
+    function convertDuration(duration) {
+      let timePieces = duration.split(' '); // split will divide the duration string into two strings (hours & minutes)
+    
+      // reduce to sum hours (in minutes) and minutes
+      let minutes = timePieces.reduce((sum, onePiece) => {
+        if (onePiece.includes('h')) {
+          return sum + convertHours(onePiece); 
+        }
+        return sum + convertMinutes(onePiece);
+      }, 0);
+    
+      return minutes; // return total minutes
+    }
+  
 // BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
