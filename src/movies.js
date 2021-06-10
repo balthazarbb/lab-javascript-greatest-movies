@@ -70,10 +70,10 @@ function orderByYear(movies) {
   let moviesArr = JSON.parse(JSON.stringify(movies)); // deep clone to not mutate original
 
   // sort method by year and in case year is the same, by title. You don't need to save in a variable, as sort method will mutate the moviesArr we created above.
-  moviesArr.sort((a, b) => {
-    if (a.year > b.year) {
+  moviesArr.sort((elem1, elem2) => {
+    if (elem1.year > elem2.year) {
       return 1;
-    } else if (b.year > a.year) {
+    } else if (elem2.year > elem1.year) {
       return -1;
     } else {
       if (a.title > b.title) {
