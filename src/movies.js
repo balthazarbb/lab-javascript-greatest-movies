@@ -131,5 +131,40 @@ function turnHoursToMinutes(movies) {
     
       return minutes; // return total minutes
     }
-  
+  // map to add the newly found minutes amount as number to a new array
+  let moviesHoursToMinArr = movies.map(function(eachMovie) {
+    let fixedMovie = JSON.parse(JSON.stringify(eachMovie)) // deep clone to not mutate original
+    fixedMovie.duration = convertDuration(fixedMovie.duration) // dot operator to change the value of the duration attribute with the result of calling the function convertDuration
+    return fixedMovie
+})
+
+  return moviesHoursToMinArr // return the new array
+}
 // BONUS - Iteration 8: Best yearly rate average - Best yearly rate average
+function bestYearAvg(movies) {
+    if (!movies.length) return null; // condition to pass test. 0 is a falsy value, so if the length is 0, then !0 is true.
+  
+    let masterObject = {}; // creating a new object with the years as keys and an array of movie objects as value.
+  
+    // a forEach that will iterate over movies and will add the atribute of the year
+    movies.forEach(eachMovie => {
+      if (!masterObject[eachMovie.year]) {
+        masterObject[eachMovie.year] = [eachMovie]; // to create the array with the movie object if the atribute doesn't exist
+      } else {
+        masterObject[eachMovie.year].push(eachMovie); // to add the movie to the array if the year atribute and the array already exist
+      }
+    });
+  
+    let highest = 0; // variable for the highest average rate
+    let theActualYear; // variable for the year of the highest average rate
+  
+    // iterating over the masterObject with for in loop. for every year it will use the ratesAverage function created in iteration 3.
+    for (let theYear in masterObject) {
+      // conditional, if the average of the current iteration is higher than the highest variable, it will update both variables (highest & theActualYear)
+      if (ratesAverage(masterObject[theYear]) > highest) {
+        highest = ratesAverage(masterObject[theYear]);
+        theActualYear = theYear;
+      }
+    }
+    return `The best year was ${theActualYear} with an average rate of ${highest}`; // return the string as template literals
+  }
